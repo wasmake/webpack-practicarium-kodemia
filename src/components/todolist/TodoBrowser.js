@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CreateTodo from "./CreateTodo";
 
 import * as todoActions from '../../store/actions/todoActions';
+import { getAsyncData, removeAsyncTodo } from "../../utils/backendFetcher";
 
 export default function TodoBrowser() {
     const dispatch = useDispatch();
@@ -12,8 +13,17 @@ export default function TodoBrowser() {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        getAsyncData("todos").then((data) => {
+            dispatch(todoActions.setTodosAction(data));
+        });
+    }, []);
+
     function removeTodo(id) {
-        dispatch(todoActions.removeTodoAction(id));
+        console.log(id);
+        removeAsyncTodo(id).then((data) => {
+            dispatch(todoActions.removeTodoAction(id));
+        });
     }
 
     function editTodo(id) {
@@ -28,8 +38,8 @@ export default function TodoBrowser() {
                 <CreateTodo />
             </div>
             {
-                todos.map((todo) => {
-                    return <TodoItem key={todo.id} data={todo} remove={removeTodo} edit={editTodo} />
+                todos.map((todo, index) => {
+                    return <TodoItem key={index} data={todo} remove={removeTodo} edit={editTodo} />
                 })
             }
         </div>

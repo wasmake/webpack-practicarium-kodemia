@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TodoItem(props) {
-    const {id, name, description, done} = props.data;
+    const {_id: id, title, description, done} = props.data;
     const {remove, edit} = props;
 
     return (
@@ -10,7 +10,7 @@ export default function TodoItem(props) {
                 <input type="checkbox" checked={done} onChange={() => {}} />
             </div>
             <div className="col-9">
-                <h2>{name}</h2>
+                <h2>{title}</h2>
                 <p>{description}</p>
             </div>
             <div className="col-2">

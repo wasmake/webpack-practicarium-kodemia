@@ -19,7 +19,7 @@ export default function TodoEdit() {
 
     function finishEdit(){
         const editedTodo = {
-            id: Number(id),
+            id: id,
             name: todoNameInput.current.value,
             description: todoDescriptionInput.current.value,
             done: todoDoneCheckbox.current.checked
@@ -35,7 +35,7 @@ export default function TodoEdit() {
 
     useEffect(() => {
         const newTodo = todos.find((todo) => {
-            return todo.id === Number(id);
+            return todo._id === id;
         });
 
         setActiveTodo(newTodo);
@@ -44,13 +44,13 @@ export default function TodoEdit() {
     return (
         <div className="TodoEdit">
             {
-                activeTodo.name ? (
+                activeTodo.title ? (
                     <div className="container card">
                         <Link to="/">Back to Todo List</Link>
                         <h4>Task #{id}</h4>
                         <div className="form-group">
                             <label htmlFor="todoName">Name</label>
-                            <input ref={todoNameInput} type="text" className="form-control" id="todoName" defaultValue={activeTodo.name} />
+                            <input ref={todoNameInput} type="text" className="form-control" id="todoName" defaultValue={activeTodo.title} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="todoDescription">Description</label>

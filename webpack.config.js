@@ -16,15 +16,11 @@ module.exports = {
 
     module: {
         rules: [
+            // Load js and jsx files
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
-                use: {
-                    loader:'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-react', '@babel/preset-env'],
-                    },
-                }
+                use: ['babel-loader'],
             },
             {
                 test: /\.css$/,

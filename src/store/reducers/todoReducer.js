@@ -1,31 +1,17 @@
 import * as actionTypes from '../actions/todoActions';
 
 const initialState = {
-    todos: [
-        {
-            id: 0,
-            name: "Examen de Nodejs",
-            description: "Hacer el examen de Nodejs",
-            done: false
-        },
-        {
-            id: 1,
-            name: "Examen de React",
-            description: "Hacer el examen de React",
-            done: true
-        },
-        {
-            id: 2,
-            name: "Examen de Angular",
-            description: "Hacer el examen de Angular",
-            done: false
-        }
-    ]
+    todos: []
 }
 
 const todoReducer = (state = initialState, action) => {
 
     switch(action.type) {
+        case actionTypes.SET_TODOS:
+            return {
+                ...state,
+                todos: action.payload
+            };
         case actionTypes.ADD_TODO:
             return {
                 ...state,
@@ -34,7 +20,7 @@ const todoReducer = (state = initialState, action) => {
         case actionTypes.REMOVE_TODO:
             return {
                 ...state,
-                todos: state.todos.filter(todo => todo.id !== Number(action.payload.id))
+                todos: state.todos.filter(todo => todo._id !== action.payload.id)
             };
         case actionTypes.EDIT_TODO:
             return {
